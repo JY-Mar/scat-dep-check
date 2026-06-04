@@ -1,0 +1,49 @@
+{
+  "name": "@scat1995/dep-check",
+  "version": "1.0.0",
+  "description": "Depandences check",
+  "type": "module",
+  "author": "JY-Mar",
+  "license": "MIT",
+  "homepage": "https://github.com/JY-Mar/scat-dep-check#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JY-Mar/scat-dep-check.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JY-Mar/scat-dep-check/issues"
+  },
+  "keywords": [
+    "dep-check",
+    "scientificat1995"
+  ],
+  "bin": {
+    "dep-check": "./dist/index.cjs"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "link-g": "npm link",
+    "unlink-g": "npm unlink @scat1995/dep-check -g",
+    "reinstall": "npm install",
+    "publish-npmjs": "npm publish --access public",
+    "publish-npmjs.beta": "npm publish --tag beta --access public"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "rimraf": "^6.0.1",
+    "terser": "^5.46.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.2"
+  }
+}
