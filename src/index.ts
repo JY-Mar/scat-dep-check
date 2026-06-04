@@ -278,18 +278,18 @@ async function run() {
 
   try {
     // 打印系统信息
-    console.log(`[${t('osInfo')}: ${getOsDisplayName()} (${CURRENT_OS}) | ${t('langInfo')}: ${LANG.toUpperCase()}]`)
-    console.log()
+    console.info(`[${t('osInfo')}: ${getOsDisplayName()} (${CURRENT_OS}) | ${t('langInfo')}: ${LANG.toUpperCase()}]`)
+    console.info()
 
     // 前置环境检查
     checkPackageJson()
     checkNpmAvailable()
 
     // 1. 依赖校验
-    console.log(t('checkingDeps'))
+    console.info(t('checkingDeps'))
     try {
       safeExec(NPM_CMD, ['list', '--depth=0'], { stdio: 'ignore' })
-      console.log(`${t('depsOk')}\n`)
+      console.info(`${t('depsOk')}\n`)
     } catch (err) {
       console.error(`${t('depsMissing')}`)
       console.error(`   ${t('detail')}: ${err.message}\n`)
@@ -298,10 +298,10 @@ async function run() {
       const answer = await focusPrompt(rl, t('promptInstall'))
 
       if (['y', 'yes'].includes(answer.toLowerCase())) {
-        console.log(`\n${t('installing')}\n`)
+        console.info(`\n${t('installing')}\n`)
         try {
           await execInherit(NPM_CMD, ['install'])
-          console.log(`\n${t('installOk')}\n`)
+          console.info(`\n${t('installOk')}\n`)
         } catch (e) {
           console.error(`\n${t('installFail')}`)
           console.error(`   ${t('reason')}: ${e.message}\n`)
@@ -309,7 +309,7 @@ async function run() {
           return
         }
       } else {
-        console.log(`\n${t('cancelled')}\n`)
+        console.info(`\n${t('cancelled')}\n`)
         process.exitCode = 1
         return
       }
@@ -330,9 +330,9 @@ async function run() {
       return
     }
 
-    console.log(`${t('executing')}: ${cmd} ${cmdArgs.join(' ')}\n`)
+    console.info(`${t('executing')}: ${cmd} ${cmdArgs.join(' ')}\n`)
     await execInherit(cmd, cmdArgs, { shell: IS_WINDOWS })
-    console.log(`\n${t('cmdDone')}\n`)
+    console.info(`\n${t('cmdDone')}\n`)
     process.exitCode = 0
   } catch (err) {
     console.error(`\n${t('error')}: ${err.message}\n`)
