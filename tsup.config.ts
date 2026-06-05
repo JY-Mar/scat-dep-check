@@ -26,11 +26,7 @@ export default defineConfig(() => {
     {
       ...shared,
       format: ['esm'],
-      dts: {
-        bundle: true,
-        entry,
-        out: 'index.d.ts'
-      }
+      dts: false
     },
     {
       ...shared,
